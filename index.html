@@ -161,7 +161,7 @@ p {
 /* Fade-in effect */
 .fade-in {
     opacity: 0;
-    transition: opacity 1s ease-in;
+    transition: opacity 3s ease-in;
 }
 
 .fade-in.visible {
@@ -193,7 +193,7 @@ p {
 
     <div class="container-fluid">
         <div class="row homeContent">
-            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center hero d-none d-md-flex" id="heroDiv">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center hero d-md-flex" id="heroDiv">
             <div class="text-center lead fs-1">Welcome to Our Car Valuation Tool</div>
             <p class="text-center lead">
                 Evaluate your car's worth effortlessly and accurately. Get personalized insights based on your car's condition, age, and more!
@@ -439,7 +439,7 @@ p {
         heroDiv.classList.add("fade-in");
         setTimeout(() => {
             heroDiv.classList.add("visible");
-        }, 2000); // Delay for a smoother effect
+        }, 100); // Delay for a smoother effect
     });
 
 document.addEventListener('DOMContentLoaded', function () {
