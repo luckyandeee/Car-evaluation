@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Responsive Two-Column Layout</title>
+    <style>
+    body {
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+    
+.homeContent {
+    height: 100dvh;
+    background-image: url('DeesktopBG.jpg'); /* Replace with your image path */
+    background-size: cover; /* This ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+    .footer-logo {
+    width: 100px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 16px; /* Space below the logo */
+}
+
+
+.container {
+    
+    width: 100%;
+    padding: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.5), rgba(255, 127, 0, 0.5), rgba(255, 255, 0, 0.5), rgba(0, 255, 0, 0.5), rgba(0, 0, 255, 0.5), rgba(75, 0, 130, 0.5), rgba(148, 0, 211, 0.5));
+    background-size: 300% 300%;
+    animation: shine 4s ease-in-out infinite, rotate 10s linear infinite;
+    filter: blur(20px);
+    z-index: 0;
+}
+
+@keyframes shine {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.hero {
+    position: relative;
+    text-align: center;
+    z-index: 1; /* Ensure content is above the glow */
+}
+
+
+.footer {
+    position: relative;
+    background-color: black;
+    box-shadow: 0 -10px 30px rgba(255, 255, 255, 0.1);
+}
+.navbar {
+    mqrgin:0;
+    padding: 0; /* Remove padding */
+    height: 40px; /* Set height based on your logo size */
+}
+
+.logo {
+    padding:0;
+    width: 100vw; /* Maintain original width */
+    height: auto; /* Set a specific height */
+    display: block; /* Prevents inline spacing issues */
+}
+
+.existing-div {
+    position: relative;
+    z-index: 1; /* Ensure content is above the glow */
+}
+
+.question, .result {
+    background: black;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: none;
+    padding: 10px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #ffffff;
+    border-radius: 5px;
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+.info-button {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #00bfff;
+}
+
+@media (max-width: 767px) {
+    .existing-div {
+        padding: 10px;
+    }
+    .homeContent {
+    height: 75dvh;
+    background-image: url('MoobileBG.jpg'); /* Replace with your image path */
+    background-size: cover; /* This ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+    .hero {
+    text-align: center; /* Center text */
+    padding: 40px 20px; /* Add some padding */
+}
+
+h1 {
+    font-size: 2.5rem; /* Adjust heading size */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+p {
+    font-size: 1.2rem; /* Adjust paragraph size */
+    margin-bottom: 30px; /* Space below the paragraph */
+}
+
+.btn {
+    padding: 15px; /* Increase button padding for a better look */
+}
+
+/* Fade-in effect */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+    .flybutton {
+        background-color: #121212;
+        color:white;
+    position: fixed;
+    bottom: 25%;
+    left: 20px;
+    z-index: 1000; /* Ensure it stays on top */
+}
+    
+
+
+    
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg  justify-content-center">
+        <a href="#">
+            <img src="Logoo.jpg" alt="Logo" class="logo">
+        </a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row homeContent">
+            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center hero d-none d-md-flex" id="heroDiv">
+            <div class="text-center lead fs-1">Welcome to Our Car Valuation Tool</div>
+            <p class="text-center lead">
+                Evaluate your car's worth effortlessly and accurately. Get personalized insights based on your car's condition, age, and more!
+            </p>
+            <a id="showContent" class="btn btn-primary mt-3 w-100 d-md-none">Get Started</a>
+        </div>
+            <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-start existing-div" id="existingDiv">
+                 <div class="container">
+                     
+        <div class="glow"></div>
+        <div class="toast" id="toast"></div>
+
+        <div class="question" id="question1">
+            <label>Original on-road price of the car (in ₹):</label>
+            <input type="number" id="carPrice" class="form-control" placeholder="1500000" required>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-primary" onclick="nextQuestion(1)">Next</button>
+            </div>
+        </div>
+
+        <div class="question" id="question2" style="display:none;">
+            <label>When did you buy your car? (YYYY):</label>
+            <input type="number" id="purchaseYear" class="form-control" placeholder="2018" min="1900" max="2100" required>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-secondary" onclick="previousQuestion(2)">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextQuestion(2)">Next</button>
+            </div>
+        </div>
+
+        <div class="question" id="question3" style="display:none;">
+            <label>Number of previous owners:</label>
+            <input type="number" id="previousOwners" class="form-control" placeholder="1" required>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-secondary" onclick="previousQuestion(3)">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextQuestion(3)">Next</button>
+            </div>
+        </div>
+
+        <div class="question" id="question4" style="display:none;">
+            <label>Type of car:</label>
+            <select id="carType" class="form-control" required>
+        <option value="" disabled selected>Select a car type</option>
+        <option value="luxury">Luxury</option>
+        <option value="dailyCommute">Daily Commute</option>
+        <option value="sports">Sports</option>
+    </select>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-secondary" onclick="previousQuestion(4)">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextQuestion(4)">Next</button>
+            </div>
+        </div>
+
+        <div class="question" id="question5" style="display:none;">
+            <label>Condition of the car:</label>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="condition" value="excellent" required> Excellent
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="condition" value="good"> Good
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="condition" value="fair"> Fair
+                </label>
+                <label class="btn btn-outline-primary">
+                    <input type="radio" name="condition" value="poor"> Poor
+                </label>
+                <span class="info-button" onclick="showInfo('condition')">ℹ️</span>
+            </div>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-secondary" onclick="previousQuestion(5)">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextQuestion(5)">Next</button>
+            </div>
+        </div>
+
+        <div class="question" id="question6" style="display:none;">
+            <label>Severity of any accident:</label>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-danger">
+                    <input type="radio" name="accidentSeverity" value="severe"> Severe
+                </label>
+                <label class="btn btn-outline-warning">
+                    <input type="radio" name="accidentSeverity" value="medium"> Medium
+                </label>
+                <label class="btn btn-outline-info">
+                    <input type="radio" name="accidentSeverity" value="least"> Least
+                </label>
+                <label class="btn btn-outline-secondary">
+                    <input type="radio" name="accidentSeverity" value="none"> None
+                </label>
+                <span class="info-button" onclick="showInfo('accidentSeverity')">ℹ️</span>
+            </div>
+            <div class="btn-group mt-3">
+                <button type="button" class="btn btn-secondary" onclick="previousQuestion(6)">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="calculatePrice()">Submit</button>
+            </div>
+        </div>
+
+        <div class="result" style="display:none;">
+            <h2>Estimated Car Value:</h2>
+            <p id="result">---</p>
+            
+            <h2>Estimated Price Range:</h2>
+            <p id="rangeResult">---</p>
+            
+            <button class="btn btn-primary mt-3" onclick="restart()">Start Over</button>
+        </div>
+                     
+    </div><button id="hideContent" class="d-md-none d-none btn flybutton">
+            <i class="fas fa-home"></i>
+        </button>
+            </div>
+            
+        </div>
+     
+        
+    
+</div>
+
+        
+        
+    </div>
+<footer class="footer text-white text-center py-4 fixed-bottom">
+    
+    <p>&copy; 2024 
+        <img src="Logoo.jpg" alt="Company Logo" class="footer-logo">
+    . All rights reserved.</p>
+    <p>
+        <a href="#" class="text-white" data-toggle="modal" data-target="#privacyModal">Privacy Policy</a> | 
+        <a href="#" class="text-white" data-toggle="modal" data-target="#termsModal">Terms of Service</a> | 
+        <a href="#" class="text-white" data-toggle="modal" data-target="#contactModal">Contact Us</a>
+    </p>
+</footer>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark">
+                <h6>Introduction</h6>
+                <p>Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+                
+                <h6>Information Collection</h6>
+                <p>Presently we aren't collecting any data. </p>
+                
+                <h6>Use of Information</h6>
+                <p>Not applicable in the moment. </p>
+                
+                <h6>Security</h6>
+                <p>We have security team waiting for completion, so they can secure your use.</p>
+                
+                <h6>Changes to This Policy</h6>
+                <p>We may update this privacy policy periodically. Any changes will be posted on this page.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark">
+                <h6>Acceptance of Terms</h6>
+                <p>By using our services, you agree to these terms. If you do not agree, please do not use our services.</p>
+
+                <h6>Service Description</h6>
+                <p>We provide a platform for users to access various resources and services as outlined on our site.</p>
+
+                <h6>User Responsibilities</h6>
+                <p>You are responsible for your account and should maintain the confidentiality of your login information.</p>
+
+                <h6>Limitation of Liability</h6>
+                <p>We are not liable for any indirect, incidental, or consequential damages arising from the use of our services.</p>
+
+                <h6>Changes to Terms</h6>
+                <p>We reserve the right to modify these terms at any time. Users will be notified of significant changes.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Us Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark">
+    <p>If you have any questions or feedback, feel free to reach out to us:</p>
+    <p><strong>Email:</strong> <a href="mailto:support@example.com" class="text-dark">support@example.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:(123)456-7890" class="text-dark">(123) 456-7890</a></p>
+    
+    <h6>Follow Us on Social Media:</h6>
+    <div>
+        <a href="https://www.facebook.com" target="_blank" class="text-dark mx-2">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" class="text-dark mx-2">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="text-dark mx-2">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" class="text-dark mx-2">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+    </div>
+</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const heroDiv = document.getElementById("heroDiv");
+        heroDiv.classList.add("fade-in");
+        setTimeout(() => {
+            heroDiv.classList.add("visible");
+        }, 2000); // Delay for a smoother effect
+    });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const navbarMenu = document.getElementById('hideContent');
+    
+    // Hide navbar menu when an input element is focused (assuming virtual keyboard is active)
+    const inputs = document.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+    input.addEventListener('focus', function () {
+    // Hide the navbar-menu on input focus
+    navbarMenu.style.display = 'none';
+    });
+    
+    input.addEventListener('blur', function () {
+    // Show the navbar-menu again when input loses focus
+    navbarMenu.style.display = 'flex';
+    });
+    });
+    });
+    
+
+</script>
+
+    <script>
+    document.getElementById('showContent').onclick = function() {
+        // Show existing content and hide hero content
+        document.getElementById('heroDiv').classList.add('d-none');
+        document.getElementById('heroDiv').classList.remove('d-flex');
+        document.getElementById('existingDiv').classList.remove('d-none');
+        document.getElementById('existingDiv').classList.add('d-flex');
+        
+        // Update button visibility
+        document.getElementById('showContent').classList.add('d-none');
+        document.getElementById('hideContent').classList.remove('d-none');
+    };
+
+    document.getElementById('hideContent').onclick = function() {
+        // Show hero content and hide existing content
+        document.getElementById('existingDiv').classList.add('d-none');
+        document.getElementById('existingDiv').classList.remove('d-flex');
+        document.getElementById('heroDiv').classList.remove('d-none');
+        document.getElementById('heroDiv').classList.add('d-flex');
+        
+        // Update button visibility
+        document.getElementById('showContent').classList.remove('d-none');
+        document.getElementById('hideContent').classList.add('d-none');
+    };
+</script>
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+        let currentQuestion = 1;
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.style.display = 'block';
+            toast.style.opacity = 1;
+            toast.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                toast.style.opacity = 0;
+                toast.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 500);
+            }, 3000);
+        }
+
+        function showInfo(type) {
+            let message = '';
+            if (type === 'condition') {
+                message = 'Select the condition that best describes your car.';
+            } else if (type === 'accidentSeverity') {
+                message = 'Choose the severity of any accidents your car has had.';
+            }
+            showToast(message);
+        }
+
+        function nextQuestion(questionNumber) {
+            if (!validateInput(questionNumber)) return;
+
+            const currentDiv = document.getElementById(`question${questionNumber}`);
+            currentDiv.style.opacity = 0;
+            currentDiv.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+                currentDiv.style.display = 'none';
+                currentQuestion++;
+                const nextDiv = document.getElementById(`question${currentQuestion}`);
+                nextDiv.style.display = 'block';
+                nextDiv.classList.add('fade-in');
+                setTimeout(() => {
+                    nextDiv.style.opacity = 1;
+                    nextDiv.style.transform = 'translateY(0)';
+                }, 10);
+            }, 50);
+        }
+
+        function previousQuestion(questionNumber) {
+            const currentDiv = document.getElementById(`question${questionNumber}`);
+            currentDiv.style.opacity = 0;
+            currentDiv.style.transform = 'translateY(-20px)';
+
+            setTimeout(() => {
+                currentDiv.style.display = 'none';
+                currentQuestion--;
+                const prevDiv = document.getElementById(`question${currentQuestion}`);
+                prevDiv.style.display = 'block';
+                prevDiv.classList.add('fade-in');
+                setTimeout(() => {
+                    prevDiv.style.opacity = 1;
+                    prevDiv.style.transform = 'translateY(0)';
+                }, 10);
+            }, 50);
+        }
+
+        function validateInput(questionNumber) {
+            if (questionNumber === 1) {
+                const carPrice = parseFloat(document.getElementById("carPrice").value);
+                if (isNaN(carPrice) || carPrice <= 0) {
+                    showToast("Invalid price. Please enter a valid price.");
+                    return false;
+                }
+            }
+            if (questionNumber === 2) {
+                const purchaseYear = parseInt(document.getElementById("purchaseYear").value);
+                const currentYear = new Date().getFullYear();
+                if (isNaN(purchaseYear) || purchaseYear > currentYear || purchaseYear < 1900) {
+                    showToast("Invalid year. Please enter a valid purchase year.");
+                    return false;
+                }
+            }
+            if (questionNumber === 3) {
+                const previousOwners = parseInt(document.getElementById("previousOwners").value);
+                if (isNaN(previousOwners) || previousOwners < 0) {
+                    showToast("Invalid input. Please enter a valid number of previous owners.");
+                    return false;
+                }
+            }
+            if (questionNumber === 5) {
+                const condition = document.querySelector('input[name="condition"]:checked');
+                if (!condition) {
+                    showToast("Please select the condition of the car.");
+                    return false;
+                }
+            }
+            if (questionNumber === 6) {
+                const accidentSeverity = document.querySelector('input[name="accidentSeverity"]:checked');
+                if (!accidentSeverity) {
+                    showToast("Please select the accident severity.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function calculatePrice() {
+            if (!validateInput(currentQuestion)) return;
+
+            const carPrice = parseFloat(document.getElementById("carPrice").value);
+            const purchaseYear = parseInt(document.getElementById("purchaseYear").value);
+            const currentYear = new Date().getFullYear();
+            const yearsOwned = currentYear - purchaseYear;
+            const previousOwners = parseInt(document.getElementById("previousOwners").value);
+            const carType = document.getElementById("carType").value;
+            const condition = document.querySelector('input[name="condition"]:checked').value;
+            const accidentSeverity = document.querySelector('input[name="accidentSeverity"]:checked').value;
+
+            let depreciationRate = 0;
+            switch (carType) {
+                case 'luxury':
+                    depreciationRate = yearsOwned < 4 ? 0.10 : 0.05;
+                    break;
+                case 'dailyCommute':
+                    depreciationRate = yearsOwned < 4 ? 0.15 : 0.07;
+                    break;
+                case 'sports':
+                    depreciationRate = yearsOwned < 6 ? 0.20 : 0.10;
+                    break;
+            }
+
+            const totalDepreciation = carPrice * depreciationRate * yearsOwned;
+            let currentValue = carPrice - totalDepreciation;
+
+            if (condition === 'excellent') {
+                currentValue *= (yearsOwned <= 4) ? 1.05 : 1.01;
+            } else if (condition === 'good') {
+                currentValue *= 1.05;
+            } else if (condition === 'fair') {
+                currentValue *= 0.90;
+            } else if (condition === 'poor') {
+                currentValue *= 0.80;
+            }
+
+            let accidentDepreciation = 0;
+            switch (accidentSeverity) {
+                case 'severe':
+                    accidentDepreciation = currentValue * 0.30;
+                    break;
+                case 'medium':
+                    accidentDepreciation = currentValue * 0.15;
+                    break;
+                case 'least':
+                    accidentDepreciation = currentValue * 0.05;
+                    break;
+                case 'none':
+                    accidentDepreciation = 0;
+                    break;
+            }
+
+            currentValue -= accidentDepreciation;
+            const minimumValue = carPrice * 0.20;
+            if (currentValue < minimumValue) {
+                currentValue = minimumValue;
+            }
+
+            const rangeLow = currentValue * 0.90;
+            const rangeHigh = currentValue * 1.10;
+
+            const resultDiv = document.querySelector('.result');
+            resultDiv.style.display = 'block';
+            resultDiv.classList.add('fade-in');
+            setTimeout(() => {
+                resultDiv.style.opacity = 1;
+                resultDiv.style.transform = 'translateY(0)';
+            }, 10);
+
+            document.getElementById("result").innerHTML = `Estimated Price: ₹${currentValue.toFixed(2)}`;
+            document.getElementById("rangeResult").innerHTML = `Estimated Price Range: ₹${rangeLow.toFixed(2)} - ₹${rangeHigh.toFixed(2)}`;
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+        }
+
+        function restart() {
+            document.querySelector('.result').style.display = 'none';
+            currentQuestion = 1;
+            document.querySelectorAll('.question').forEach(q => {
+                q.style.display = 'none';
+                q.style.opacity = 0;
+                q.style.transform = 'translateY(20px)';
+            });
+            const firstDiv = document.getElementById(`question1`);
+            firstDiv.style.display = 'block';
+            firstDiv.classList.add('fade-in');
+            setTimeout(() => {
+                firstDiv.style.opacity = 1;
+                firstDiv.style.transform = 'translateY(0)';
+            }, 10);
+            document.getElementById("carPrice").value = "";
+            document.getElementById("purchaseYear").value = "";
+            document.getElementById("previousOwners").value = "";
+            document.getElementById("carType").selectedIndex = 0;
+            document.querySelectorAll('input[name="condition"]').forEach(input => input.checked = false);
+            document.querySelectorAll('input[name="accidentSeverity"]').forEach(input => input.checked = false);
+        }
+
+        // Initialize the first question
+        document.getElementById('question1').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('question1').classList.add('fade-in');
+            document.getElementById('question1').style.opacity = 1;
+        }, 10);
+    </script>
+</body>
+</html>
+
+</body>
+</html>
