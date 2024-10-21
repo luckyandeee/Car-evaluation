@@ -20,14 +20,16 @@
     color: #ffffff;
     font-family: 'Roboto', sans-serif;
         background-image: url('DeesktopBg.jpg'); /* Replace with your image path */
-    background-size: cover; /* This ensures the image covers the entire area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure full viewport height */
+    margin: 0; /* Remove default margin */
+    
 }
     
 .homeContent {
-    height: 100dvh;
+    height: 100vh;
     }
     .footer-logo {
     width: 100px; /* Adjust as needed */
@@ -339,13 +341,13 @@ p {
         <div class="col-md-6">
             <h4 class="mt-4">Formula for Valuation</h4>
             <ul class="list-group">
-                <li class="list-group-item bg-transparent border border-warning">
+                <li class="list-group-item bg-transparent border border-warning bg-md-warning">
                     <strong>Original On-Road Price:</strong> The valuation begins with the original price of the car, establishing a baseline for depreciation calculations.
                 </li>
-                <li class="list-group-item bg-transparent border border-warning">
+                <li class="list-group-item bg-transparent border border-warning bg-md-warning">
                     <strong>Age of the Car:</strong> We calculate the number of years since the car was purchased, significantly influencing depreciation rates. Newer cars tend to depreciate faster.
                 </li>
-                <li class="list-group-item bg-transparent border border-warning">
+                <li class="list-group-item bg-transparent border border-warning bg-md-warning">
                     <strong>Type of Car:</strong> Different types of cars have distinct depreciation rates:
                     <ul>
                         <li><strong>Luxury Cars:</strong> These may depreciate at a slower rate after the initial years.</li>
@@ -353,14 +355,14 @@ p {
                         <li><strong>Sports Cars:</strong> Significant initial depreciation that can stabilize over time.</li>
                     </ul>
                 </li>
-                <li class="list-group-item bg-transparent border border-warning">
+                <li class="list-group-item bg-transparent border border-warning bg-md-warning">
                     <strong>Condition of the Car:</strong> The vehicle's condition plays a pivotal role:
                     <ul>
                         <li><strong>Excellent Condition:</strong> Slightly increases value.</li>
                         <li><strong>Poor Condition:</strong> Decreases value significantly.</li>
                     </ul>
                 </li>
-                <li class="list-group-item bg-transparent border border-warning">
+                <li class="list-group-item bg-transparent border border-warning bg-md-warning">
                     <strong>Accident History:</strong> Severity of past accidents impacts market value, with more severe accidents leading to greater depreciation.
                 </li>
             </ul>
@@ -369,10 +371,10 @@ p {
         <div class="col-md-6">
             <h4 class="mt-4">Aptness of Our Formula</h4>
             <ul class="list-group">
-                <li class="list-group-item bg-transparent border border-primary">Data-Driven Approach: Based on industry standards and historical data for accurate valuations.</li>
-                <li class="list-group-item bg-transparent border border-primary">Comprehensive Coverage: Multiple factors considered for a holistic view of your car's worth.</li>
-                <li class="list-group-item bg-transparent border border-primary">User-Friendly Interface: Easy input process with instant feedback.</li>
-                <li class="list-group-item bg-transparent border border-primary">Regular Updates: Continuously refined formula based on market trends.</li>
+                <li class="list-group-item bg-transparent border border-primary bg-md-primary ">Data-Driven Approach: Based on industry standards and historical data for accurate valuations.</li>
+                <li class="list-group-item bg-transparent border border-primary bg-md-primary">Comprehensive Coverage: Multiple factors considered for a holistic view of your car's worth.</li>
+                <li class="list-group-item bg-transparent border border-primary bg-md-primary">User-Friendly Interface: Easy input process with instant feedback.</li>
+                <li class="list-group-item bg-transparent border border-primary bg-md-primary">Regular Updates: Continuously refined formula based on market trends.</li>
             </ul>
         </div>
     </div>
